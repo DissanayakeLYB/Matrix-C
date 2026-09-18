@@ -1,2 +1,10 @@
-./src/matrix
-./src/main
+# Compiled executables
+src/main
+src/matrix
+
+# Object files
+*.o
+
+# Debug/build output
+*.out
+
