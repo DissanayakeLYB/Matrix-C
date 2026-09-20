@@ -106,15 +106,53 @@ matrix transpose_matrix(matrix Matrix) {
 };
 
 
-int main() {
-	matrix MatrixA = create_matrix();
-	print_matrix(MatrixA);
+matrix add_matrix(matrix MatrixA, matrix MatrixB) {
 
-	matrix transposed_matrix = transpose_matrix(MatrixA);
-	print_matrix(transposed_matrix);
+	matrix added_matrix;
+
+	added_matrix.rows = MatrixA.rows;
+	added_matrix.columns = MatrixA.columns;
+
+	added_matrix.values = malloc(
+		added_matrix.rows * added_matrix.columns * sizeof(int)
+	);
+
+	if ( added_matrix.values == NULL ) {
+		printf("Memory allocation failed. \n");
+		exit(1);
+	};
+
+	for (int i = 0; i < added_matrix.rows * added_matrix.columns; i++) {
+		added_matrix.values[i] = added_matrix.values[i] + added_matrix.values[i];
+	};
+
+	return added_matrix;
+};
+
+
+int main() {
+	// matrix MatrixA = create_matrix();
+	// print_matrix(MatrixA);
+
+	matrix MatrixA = create_matrix();
+	matrix MatrixB = create_matrix();
+
+	matrix added_matrix = add_matrix( MatrixA, MatrixB );
+
+	print_matrix(added_matrix);
+	
+
+	// matrix transposed_matrix = transpose_matrix(MatrixA);
+	// print_matrix(transposed_matrix);
 
 	free(MatrixA.values);
-	free(transposed_matrix.values);
+	free(MatrixB.values);
+	free(added_matrix.values);
+
+	// free(transposed_matrix.values);
+
+
+
 
 	return 0;
 };
