@@ -27,18 +27,27 @@ matrix create_matrix() {
 		exit(1);
 	};
 
-	printf("---------------------------------------\n");
-	printf("Matrix format: (%d,%d)\n", matrixA.rows, matrixA.columns);
-	printf("---------------------------------------\n");
+	int counter = 0;
+	int loc_i = 1;
+	int loc_j = 1;
 
 	// assign values to the matrix
 	for (int i=0; i < matrixA.rows * matrixA.columns; i++) {
+		
 		int matrix_value;
-
-		printf("Enter the value for %d: ", i+1 );
+		
+		printf("(%d, %d) : ", loc_i, loc_j);
 		scanf("%d", &matrix_value);
 
+		if ( loc_j == matrixA.columns ) {
+			loc_i++;
+			loc_j = 1;
+		} else {
+			loc_j++;
+		};
+
 		matrixA.values[i] = matrix_value;
+		counter++;
 	}
 
 	printf("---------------------------------------\n");
@@ -106,12 +115,17 @@ matrix transpose_matrix(matrix Matrix) {
 };
 
 
-matrix add_matrix(matrix MatrixA, matrix MatrixB) {
+matrix add_matrix(matrix matrixA, matrix matrixB) {
+
+	if ( matrixA.rows != matrixB.rows || matrixA.columns != matrixB.columns) {
+		printf("Error: Matrices should have same dimensions to add.\n");
+		exit(1);
+	};
 
 	matrix added_matrix;
 
-	added_matrix.rows = MatrixA.rows;
-	added_matrix.columns = MatrixA.columns;
+	added_matrix.rows = matrixA.rows;
+	added_matrix.columns = matrixA.columns;
 
 	added_matrix.values = malloc(
 		added_matrix.rows * added_matrix.columns * sizeof(int)
@@ -123,7 +137,7 @@ matrix add_matrix(matrix MatrixA, matrix MatrixB) {
 	};
 
 	for (int i = 0; i < added_matrix.rows * added_matrix.columns; i++) {
-		added_matrix.values[i] = added_matrix.values[i] + added_matrix.values[i];
+		added_matrix.values[i] = matrixA.values[i] + matrixB.values[i];
 	};
 
 	return added_matrix;
