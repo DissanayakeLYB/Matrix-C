@@ -144,24 +144,56 @@ matrix add_matrix(matrix matrixA, matrix matrixB) {
 };
 
 
+matrix substract_matrix(matrix matrixA, matrix matrixB) {
+	
+	if ( matrixA.rows != matrixB.rows || matrixA.columns != matrixB.columns ) {
+		printf("Error: Matrices should have same dimensions to substract.\n");
+		exit(1);
+	};
+
+	matrix substracted_matrix;
+
+	substracted_matrix.rows = matrixA.rows;
+	substracted_matrix.columns = matrixA.columns;
+
+	substracted_matrix.values = malloc ( 
+		substracted_matrix.rows * substracted_matrix.columns * sizeof(int) 
+	);
+
+	if ( substracted_matrix.values == NULL ) {
+		printf("Memory allocation failed.\n");
+		exit(1);
+	};
+
+	for ( int i=0; i < substracted_matrix.rows * substracted_matrix.columns; i++) {
+		substracted_matrix.values[i] = matrixA.values[i] - matrixB.values[i];
+	};
+
+	return substracted_matrix;
+
+};
+
+
 int main() {
 	// matrix MatrixA = create_matrix();
 	// print_matrix(MatrixA);
 
-	matrix MatrixA = create_matrix();
-	matrix MatrixB = create_matrix();
+	matrix matrixA = create_matrix();
+	matrix matrixB = create_matrix();
 
-	matrix added_matrix = add_matrix( MatrixA, MatrixB );
-
-	print_matrix(added_matrix);
+	// matrix added_matrix = add_matrix( matrixA, matrixB );
+	//print_matrix(added_matrix);
 	
+	matrix substracted_matrix = substract_matrix( matrixA, matrixB );
+	print_matrix(substracted_matrix);
 
-	// matrix transposed_matrix = transpose_matrix(MatrixA);
+	// matrix transposed_matrix = transpose_matrix(matrixA);
 	// print_matrix(transposed_matrix);
 
-	free(MatrixA.values);
-	free(MatrixB.values);
-	free(added_matrix.values);
+	free(matrixA.values);
+	free(matrixB.values);
+	// free(added_matrix.values);
+	free(substracted_matrix.values);
 
 	// free(transposed_matrix.values);
 
