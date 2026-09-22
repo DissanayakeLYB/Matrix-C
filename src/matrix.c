@@ -76,11 +76,7 @@ matrix transpose_matrix(matrix Matrix) {
 	transposed_matrix.rows = Matrix.columns;
 	transposed_matrix.columns = Matrix.rows;
 
-	printf("New rows: %d \n", transposed_matrix.rows);
-	printf("New columns: %d \n", transposed_matrix.columns);
-
-	printf("---------------------------------------\n");
-	
+	printf("Transposed Matrix: \n");
 	
 	// assign memory for transpose matrix 
 	transposed_matrix.values = malloc( 
@@ -175,30 +171,69 @@ matrix substract_matrix(matrix matrixA, matrix matrixB) {
 
 
 int main() {
-	// matrix MatrixA = create_matrix();
-	// print_matrix(MatrixA);
 
-	matrix matrixA = create_matrix();
-	matrix matrixB = create_matrix();
+	printf("========= Matrix Calculator ==========\n");
 
-	// matrix added_matrix = add_matrix( matrixA, matrixB );
-	//print_matrix(added_matrix);
+	printf("1 - Print matrix\n");
+	printf("2 - Transpose Matrix\n");
+	printf("3 - Add Matrix\n");
+	printf("4 - Substract Matrix\n");
 	
-	matrix substracted_matrix = substract_matrix( matrixA, matrixB );
-	print_matrix(substracted_matrix);
+	printf("0 - Exit\n");
 
-	// matrix transposed_matrix = transpose_matrix(matrixA);
-	// print_matrix(transposed_matrix);
+	printf("\nEnter a number: ");
+	int user_input;
+	scanf("%d", &user_input);
 
-	free(matrixA.values);
-	free(matrixB.values);
-	// free(added_matrix.values);
-	free(substracted_matrix.values);
+	printf("---------------------------------------\n");
 
-	// free(transposed_matrix.values);
+	if (user_input == 0) {
+		exit(1);
 
+	} else if (user_input == 1) {
 
+		matrix matrixA = create_matrix();
+		print_matrix(matrixA);
+		
+		// free up allocated memory
+		free(matrixA.values);
 
+	} else if (user_input == 2) {
+		
+		matrix matrixA = create_matrix();
+		matrix transposed_matrix = transpose_matrix(matrixA);
+		print_matrix(transposed_matrix);
+		
+		// free up allocated memory
+		free(matrixA.values);
+		free(transposed_matrix.values);
+
+	} else if ( user_input == 3 ) {
+
+		matrix matrixA = create_matrix();
+		matrix matrixB = create_matrix();
+
+		matrix added_matrix = add_matrix(matrixA, matrixB);
+		print_matrix(added_matrix);
+
+		// free up allocated memory
+		free(matrixA.values);
+		free(matrixB.values); 
+		free(added_matrix.values);
+
+	} else if ( user_input == 4 ) {
+
+		matrix matrixA = create_matrix();
+		matrix matrixB = create_matrix();
+
+		matrix substracted_matrix = substract_matrix(matrixA, matrixB);
+		print_matrix(substracted_matrix);
+
+		// free up allocated memory
+		free(matrixA.values);
+		free(matrixB.values); 
+		free(substracted_matrix.values);
+	}
 
 	return 0;
 };
