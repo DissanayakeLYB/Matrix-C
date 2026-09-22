@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct {
-	int rows;
-	int columns;
-	int *values;
-} matrix;
+#include "../include/matrix.h"
 
 matrix create_matrix() {
 	
@@ -27,7 +22,6 @@ matrix create_matrix() {
 		exit(1);
 	};
 
-	int counter = 0;
 	int loc_i = 1;
 	int loc_j = 1;
 
@@ -47,7 +41,6 @@ matrix create_matrix() {
 		};
 
 		matrixA.values[i] = matrix_value;
-		counter++;
 	}
 
 	printf("---------------------------------------\n");
@@ -140,101 +133,32 @@ matrix add_matrix(matrix matrixA, matrix matrixB) {
 };
 
 
-matrix substract_matrix(matrix matrixA, matrix matrixB) {
+matrix subtract_matrix(matrix matrixA, matrix matrixB) {
 	
 	if ( matrixA.rows != matrixB.rows || matrixA.columns != matrixB.columns ) {
-		printf("Error: Matrices should have same dimensions to substract.\n");
+		printf("Error: Matrices should have same dimensions to subtract.\n");
 		exit(1);
 	};
 
-	matrix substracted_matrix;
+	matrix subtracted_matrix;
 
-	substracted_matrix.rows = matrixA.rows;
-	substracted_matrix.columns = matrixA.columns;
+	subtracted_matrix.rows = matrixA.rows;
+	subtracted_matrix.columns = matrixA.columns;
 
-	substracted_matrix.values = malloc ( 
-		substracted_matrix.rows * substracted_matrix.columns * sizeof(int) 
+	subtracted_matrix.values = malloc ( 
+		subtracted_matrix.rows * subtracted_matrix.columns * sizeof(int) 
 	);
 
-	if ( substracted_matrix.values == NULL ) {
+	if ( subtracted_matrix.values == NULL ) {
 		printf("Memory allocation failed.\n");
 		exit(1);
 	};
 
-	for ( int i=0; i < substracted_matrix.rows * substracted_matrix.columns; i++) {
-		substracted_matrix.values[i] = matrixA.values[i] - matrixB.values[i];
+	for ( int i=0; i < subtracted_matrix.rows * subtracted_matrix.columns; i++) {
+		subtracted_matrix.values[i] = matrixA.values[i] - matrixB.values[i];
 	};
 
-	return substracted_matrix;
+	return subtracted_matrix;
 
-};
-
-
-int main() {
-
-	printf("========= Matrix Calculator ==========\n");
-
-	printf("1 - Print matrix\n");
-	printf("2 - Transpose Matrix\n");
-	printf("3 - Add Matrix\n");
-	printf("4 - Substract Matrix\n");
-	
-	printf("0 - Exit\n");
-
-	printf("\nEnter a number: ");
-	int user_input;
-	scanf("%d", &user_input);
-
-	printf("---------------------------------------\n");
-
-	if (user_input == 0) {
-		exit(1);
-
-	} else if (user_input == 1) {
-
-		matrix matrixA = create_matrix();
-		print_matrix(matrixA);
-		
-		// free up allocated memory
-		free(matrixA.values);
-
-	} else if (user_input == 2) {
-		
-		matrix matrixA = create_matrix();
-		matrix transposed_matrix = transpose_matrix(matrixA);
-		print_matrix(transposed_matrix);
-		
-		// free up allocated memory
-		free(matrixA.values);
-		free(transposed_matrix.values);
-
-	} else if ( user_input == 3 ) {
-
-		matrix matrixA = create_matrix();
-		matrix matrixB = create_matrix();
-
-		matrix added_matrix = add_matrix(matrixA, matrixB);
-		print_matrix(added_matrix);
-
-		// free up allocated memory
-		free(matrixA.values);
-		free(matrixB.values); 
-		free(added_matrix.values);
-
-	} else if ( user_input == 4 ) {
-
-		matrix matrixA = create_matrix();
-		matrix matrixB = create_matrix();
-
-		matrix substracted_matrix = substract_matrix(matrixA, matrixB);
-		print_matrix(substracted_matrix);
-
-		// free up allocated memory
-		free(matrixA.values);
-		free(matrixB.values); 
-		free(substracted_matrix.values);
-	}
-
-	return 0;
 };
 
