@@ -13,6 +13,23 @@ matrix create_matrix() {
 	printf("Enter the number of columns: ");
 	scanf("%d", &matrixA.columns);
 
+	printf("Structure: \n");
+	int counter = 0;
+	
+	for (int i=0; i < matrixA.rows * matrixA.columns; i++) {
+		
+		printf("_ ");
+		counter++;
+
+		if (counter == matrixA.columns) {
+			printf("\n");
+			counter = 0;
+		};
+
+	};
+
+	printf("\n"); // new line for clarity
+
 	matrixA.values = malloc (
 		matrixA.rows * matrixA.columns * sizeof(int)
 	);
@@ -43,7 +60,7 @@ matrix create_matrix() {
 		matrixA.values[i] = matrix_value;
 	}
 
-	printf("---------------------------------------\n");
+	printf("\n"); // new line for clarity
 
 	return matrixA;
 }
@@ -58,7 +75,7 @@ void print_matrix( matrix Matrix ) {
 		};
 	};
 	
-	printf("---------------------------------------\n");
+	printf("\n"); // new line for clarity
 };
 
 matrix transpose_matrix(matrix Matrix) {
