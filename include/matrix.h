@@ -17,4 +17,6 @@ matrix add_matrix(matrix MatrixA, matrix MatrixB);
 
 matrix subtract_matrix(matrix MatrixA, matrix MatrixB);
 
+void free_matrix(matrix Matrix);
+
 #endif

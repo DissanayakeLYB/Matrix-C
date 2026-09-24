@@ -28,7 +28,7 @@ int main() {
 		print_matrix(matrixA);
 		
 		// free up allocated memory
-		free(matrixA.values);
+		free_matrix(matrixA);
 
 	} else if (user_input == 2) {
 		
@@ -37,8 +37,8 @@ int main() {
 		print_matrix(transposed_matrix);
 		
 		// free up allocated memory
-		free(matrixA.values);
-		free(transposed_matrix.values);
+		free_matrix(matrixA);
+		free_matrix(transposed_matrix);
 
 	} else if ( user_input == 3 ) {
 
@@ -49,9 +49,9 @@ int main() {
 		print_matrix(added_matrix);
 
 		// free up allocated memory
-		free(matrixA.values);
-		free(matrixB.values); 
-		free(added_matrix.values);
+		free_matrix(matrixA);
+		free_matrix(matrixB); 
+		free_matrix(added_matrix);
 
 	} else if ( user_input == 4 ) {
 
@@ -62,9 +62,9 @@ int main() {
 		print_matrix(subtracted_matrix);
 
 		// free up allocated memory
-		free(matrixA.values);
-		free(matrixB.values); 
-		free(subtracted_matrix.values);
+		free_matrix(matrixA);
+		free_matrix(matrixB); 
+		free_matrix(subtracted_matrix);
 	}
 
 	return 0;

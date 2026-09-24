@@ -149,6 +149,9 @@ matrix add_matrix(matrix matrixA, matrix matrixB) {
 	return added_matrix;
 };
 
+void free_matrix(matrix Matrix) {
+	free(Matrix.values);
+};
 
 matrix subtract_matrix(matrix matrixA, matrix matrixB) {
 	
