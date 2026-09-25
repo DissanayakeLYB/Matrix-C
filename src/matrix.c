@@ -8,18 +8,24 @@ matrix create_matrix() {
 	matrix matrixA;
 
 	printf("Enter the number of rows: ");
-	scanf("%d", &matrixA.rows);
+	if ( scanf("%d", &matrixA.rows) != 1 ) {
+		printf("Error: Invalid input for rows.");
+		exit(1);
+	};
 	
 	if ( matrixA.rows <= 0 ) {
-		printf("Number of rows must be a positive integer!!!");
+		printf("Error: Invalid number of rows.");
 		exit(1);
 	};
 
 	printf("Enter the number of columns: ");
-	scanf("%d", &matrixA.columns);
+	if ( scanf("%d", &matrixA.columns) != 1 ) {
+		printf("Error: Invalid input for columns.");
+		exit(1);
+	};
 
 	if ( matrixA.columns <= 0 ) {
-		printf("Number of columns must be a positive integer!!!");
+		printf("Error: Invalid number of columns.");
 		exit(1);
 	};
 
