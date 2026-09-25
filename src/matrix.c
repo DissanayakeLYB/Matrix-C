@@ -10,8 +10,18 @@ matrix create_matrix() {
 	printf("Enter the number of rows: ");
 	scanf("%d", &matrixA.rows);
 	
+	if ( matrixA.rows <= 0 ) {
+		printf("Number of rows must be a positive integer!!!");
+		exit(1);
+	};
+
 	printf("Enter the number of columns: ");
 	scanf("%d", &matrixA.columns);
+
+	if ( matrixA.columns <= 0 ) {
+		printf("Number of columns must be a positive integer!!!");
+		exit(1);
+	};
 
 	printf("Structure: \n");
 	int counter = 0;
