@@ -9,25 +9,27 @@ matrix create_matrix() {
 
 	printf("Enter the number of rows: ");
 	if ( scanf("%d", &matrixA.rows) != 1 ) {
-		printf("Error: Invalid input for rows.");
+		printf("Error: Invalid input for rows.\n");
 		exit(1);
 	};
 	
 	if ( matrixA.rows <= 0 ) {
-		printf("Error: Invalid number of rows.");
+		printf("Error: Invalid number of rows.\n");
 		exit(1);
 	};
 
 	printf("Enter the number of columns: ");
 	if ( scanf("%d", &matrixA.columns) != 1 ) {
-		printf("Error: Invalid input for columns.");
+		printf("Error: Invalid input for columns.\n");
 		exit(1);
 	};
 
 	if ( matrixA.columns <= 0 ) {
-		printf("Error: Invalid number of columns.");
+		printf("Error: Invalid number of columns.\n");
 		exit(1);
 	};
+
+
 
 	printf("Structure: \n");
 	int counter = 0;
@@ -64,7 +66,15 @@ matrix create_matrix() {
 		int matrix_value;
 		
 		printf("(%d, %d) : ", loc_i, loc_j);
-		scanf("%d", &matrix_value);
+		
+		// validate user entered values
+		if (scanf("%d", &matrix_value) != 1) {
+			printf("Error: Invalid matrix value \n");
+			free_matrix(matrixA);
+			exit(1);
+		};
+
+		
 
 		if ( loc_j == matrixA.columns ) {
 			loc_i++;
