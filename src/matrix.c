@@ -6,6 +6,7 @@ matrix create_matrix() {
 	
 	// create matrix with (rows, columns)
 	matrix matrixA;
+	matrixA.values = NULL;
 
 	printf("Enter the number of rows: ");
 	if ( scanf("%d", &matrixA.rows) != 1 ) {
@@ -176,7 +177,10 @@ matrix add_matrix(matrix matrixA, matrix matrixB) {
 };
 
 void free_matrix(matrix Matrix) {
-	free(Matrix.values);
+	if (Matrix.values != NULL) {
+		free(Matrix.values);
+	};
+
 };
 
 matrix subtract_matrix(matrix matrixA, matrix matrixB) {
